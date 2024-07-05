@@ -93,6 +93,7 @@
                                 <p><strong>Descrizione:</strong> ${product.description}</p>
                                 <p><strong>Categoria:</strong> ${product.category}</p>
                                 <img src="${product.image}" alt="${product.title}" class="img-fluid">
+                                <a href="SingoloProdotto.html?id=${product.id}" class="btn btn-primary">View Product</a>
                             </div>
                         </div>
                     `;
@@ -102,6 +103,9 @@
             .catch(error => {
                 console.error('Errore durante il fetch:',error)
             })
+            function viewProductDetails(productId) {
+      window.location.href = `product.html?id=${productId}`;
+            }
 
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
