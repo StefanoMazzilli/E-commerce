@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Prodotti per categoria</title>
+    <title id="titolo"></title>
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
 </head>
 
@@ -38,7 +38,7 @@
         <ol class="breadcrumb ps-4 pb-1">
             <li class="breadcrumb-item"><a class="text-light" href="./Home.html">Home</a></li>
             <li class="breadcrumb-item"><a class="text-light" href="./Categorie.html">Categorie</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Prodotti per categoria</li>
+            <li id="category-link" class="breadcrumb-item active" aria-current="page"></li>
         </ol>
     </nav>
     <!--FINE HEADER-->
@@ -72,7 +72,11 @@
 
         const category = getQueryParam('category');
         const categoryTitle = document.getElementById('category-title');
+        const categoryLink = document.getElementById('category-link');
+        const titolo = document.getElementById('titolo');
         categoryTitle.textContent = `Prodotti in "${category}" `;
+        categoryLink.textContent = `Prodotti in "${category}" `;
+        titolo.textContent = `Prodotti in "${category}" `;
 
         const apiUrl = `https://fakestoreapi.com/products/category/${category}`;
 
