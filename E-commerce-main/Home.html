@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!--BOOTSTRAP CSS-->
+        <link rel="stylesheet" href="./CSS/bootstrap.min.css">
+    </head>
+    <body>
+        <header class="p-3 text-bg-dark">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <img src="https://placehold.co/600x400?text=Logo" alt="Logo" width="60" height="48">
+                    </a>
+            
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+                        <li><a href="./Prodotti.html" class="nav-link px-2 text-white">Prodotti</a></li>
+                        <li><a href="./Categorie.html" class="nav-link px-2 text-white">Categorie</a></li>
+                    </ul>
+            
+                    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                        <div class="input-group my-2">
+                            <input type="text" class="form-control" id="searchbar" placeholder="Cerca prodotti..." aria-label="Example text with button addon" aria-describedby="button-addon1">
+                            <button class="btn btn-secondary" type="button" id="button-addon1" onclick="cerca()">Cerca</button>
+                        </div>
+                    </form>
+            
+                    <div class="text-end">
+                        <button type="button" class="btn btn-outline-light me-2">Login</button>
+                        <button type="button" class="btn btn-secondary">Sign-up</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <!--CAROSELLO-->
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://placehold.co/600x300/orange/white" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://placehold.co/600x300/green/white" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://placehold.co/600x300/red/white" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <!--FINE CAROSELLO-->
+        </div>
+        <div class="container">
+
+        </div>
+        <!--FOOTER-->
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top bg-secondary-subtle">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+                </a>
+                <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Company, Inc</span>
+            </div>
+        
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+            </ul>
+        </footer>
+        <!--BOOTSTRAP JS-->
+        <script src="./JS/bootstrap.bundle.min.js"></script>
+        <!--JS-->
+        <script>
+            function cerca() {
+                const ricerca = document.getElementById("searchbar");
+                //cerco tutti i prodotti
+                const url="https://fakestoreapi.com/products"
+                fetch(url)
+                    .then(res => res.json())
+                    .then(json => console.log(json))
+                    .catch();
+                
+            }
+        </script>
+    </body>
+</html>
