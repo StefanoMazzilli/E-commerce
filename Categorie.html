@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>
+            Categorie Prodotti
+        </title>
+        <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="mb-4">Categorie Prodotti</h1>
+            <div id="categories" class="row"></div>
+        </div>
+        
+
+
+        <script>
+            const apiUrl= 'https://fakestoreapi.com/products/categories'
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Errore')
+                    }
+                    return response.json();
+                })
+                .then(categories => {
+                    const categoriesContainer= document.getElementById('categories');
+                    categories.forEach(category => {
+                        const card = document.createElement('div');
+                        card.className='col-md4 md-4'
+                        card.innerHTML= `
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">${category}</h5>
+                                <a href="products.html?category=${category}" class="btn btn-primary">Vai ai prodotti</a>
+                            </div>
+                        </div>
+                        `;
+                        categoriesContainer.appendChild(card);
+                    })
+                })
+                .catch(error => {
+                    console.error('Errore durante il fetch', error)
+                })
+        </script>
+    </body>
+
+
+
+</html>
