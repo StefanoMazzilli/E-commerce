@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>
+        E-commerce
+    </title>
+    <link rel="stylesheet" href="CSS/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4"> Prodotti</h1>
+        <div class="accordion" id="productAccordion"></div>
+    </div>
+
+
+
+
+
+
+    <script>
+        const apiUrl ='https://fakestoreapi.com/products';
+
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(products => {
+                const productAccordion = document.getElementById('productAccordion');
+                products.forEach((product, index) => {
+                    const accordionItem = document.createElement('div');
+                    accordionItem.className = 'accordion-item';
+                    accordionItem.innerHTML = `
+                        <h2 class="accordion-header" id="heading${index}">
+                            <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="${index === 0 ? 'true' : 'false'}" aria-controls="collapse${index}">
+                                ${product.title}
+                            </button>
+                        </h2>
+                        <div id="collapse${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" aria-labelledby="heading${index}" data-parent="#productAccordion">
+                            <div class="accordion-body">
+                                <p><strong>Prezzo:</strong> €${product.price}</p>
+                                <p><strong>Descrizione:</strong> ${product.description}</p>
+                                <p><strong>Categoria:</strong> ${product.category}</p>
+                                <img src="${product.image}" alt="${product.title}" class="img-fluid">
+                            </div>
+                        </div>
+                    `;
+                    productAccordion.appendChild(accordionItem);
+                });
+            })
+            .catch(error => {
+                console.error('Errore durante il fetch:',error)
+            })
+
+    </script>
+   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
