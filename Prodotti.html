@@ -5,6 +5,15 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="CSS/bootstrap.min.css">
+    <style>
+        .shown {
+            display: block;
+        }
+        
+        .hidden {
+            display:none;
+        }
+    </style>
 </head>
 <body>
     <!--HEADER-->
@@ -42,14 +51,32 @@
         </ol>
     </nav>
     <!--FINE HEADER-->
-    <div class="container mt-5">
+
+    <!--LISTA PRODOTTI-->
+    <div class="container mt-5 shown" id="lista">
         <h1 class="mb-4"> Prodotti</h1>
         <div class="accordion" id="productAccordion"></div>
     </div>
 
-
-
-
+    <!--PRODOTTO SINGOLO-->
+    <div class="container my-5 hidden" id="prodotto">
+        <div class="row">
+            <div class="col-12">
+                <a href="#" class="btn btn-primary" onclick="visualizzaProdotti()">Torna ai prodotti</a>
+            </div>
+            <div class="col-md-6">
+                <div class="product-image text-center">
+                <img id="product-image" src="" alt="Product Image" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1 id="product-title"></h1>
+                <p id="product-description"></p>
+                <p class="font-weight-bold">Price: <span id="product-price"></span></p>
+                <button id="add-to-cart" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
 
     <!--FOOTER-->
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 mt-4 border-top bg-secondary-subtle">
@@ -93,7 +120,7 @@
                                 <p><strong>Descrizione:</strong> ${product.description}</p>
                                 <p><strong>Categoria:</strong> ${product.category}</p>
                                 <img src="${product.image}" alt="${product.title}" class="img-fluid">
-                                <a href="SingoloProdotto.html?id=${product.id}" class="btn btn-primary">View Product</a>
+                                <a href="#" class="btn btn-primary" onclick="visualizzaProdotto(${product.id})">View Product</a>
                             </div>
                         </div>
                     `;
@@ -103,10 +130,42 @@
             .catch(error => {
                 console.error('Errore durante il fetch:',error)
             })
-            function viewProductDetails(productId) {
-      window.location.href = `product.html?id=${productId}`;
-            }
+        function visualizzaProdotto(id) {
+            //popolo il container del singolo prodotto
+            fetch(`https://fakestoreapi.com/products/${id}`)
+            .then(response => response.json())
+            .then(data => {
+       
+                document.getElementById('product-image').src = data.image;
+                document.getElementById('product-title').textContent = data.title;
+                document.getElementById('product-description').textContent = data.description;
+                document.getElementById('product-price').textContent = `$${data.price}`;
 
+        
+                document.getElementById('add-to-cart').addEventListener('click', () => {
+          
+                    console.log('Product added to cart:', data);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching product data:', error);
+            });
+            //mostro il container del singolo elemento e nascondo quello con tutti i prodotti
+            let lista = document.getElementById("lista");
+            let prodotto = document.getElementById("prodotto");
+            lista.classList.add("hidden");
+            lista.classList.remove("shown");
+            prodotto.classList.add("shown");
+            prodotto.classList.remove("hidden");
+        }
+        function visualizzaProdotti() {
+            let lista = document.getElementById("lista");
+            let prodotto = document.getElementById("prodotto");
+            lista.classList.remove("hidden");
+            lista.classList.add("shown");
+            prodotto.classList.remove("shown");
+            prodotto.classList.add("hidden");
+        }
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
